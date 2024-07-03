@@ -32,7 +32,7 @@ const updateUI = (data) => {
     // }else{
     //     timeSrc = 'img/night.svg';
     // }
-    weather.IsDayTime ? timeSrc = 'img/day.svg' : timeSrc='img/night.svg';
+    weather.IsDayTime ? timeSrc = 'img/day.png' : timeSrc='img/night.png';
 
     time.setAttribute('src', timeSrc)
 
@@ -64,4 +64,14 @@ cityForm.addEventListener('submit', e => {
     updateCity(city)
         .then(data => updateUI(data))
         .catch(err => console.log(err));
+
+    // set local Storage
+    localStorage.setItem('city', city);
+
 });
+
+if(localStorage.getItem('city')){
+    updateCity(localStorage.getItem('city'))
+        .then(data => updateUI(data))
+        .catch(err => console.log(err));
+}
